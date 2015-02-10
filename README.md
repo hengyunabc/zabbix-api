@@ -10,7 +10,7 @@ API is simple, beacuse java can not process json like dynamic language.
 
 You can build you own ```Request``` Object.
 
-```
+```java
 public interface ZabbixApi {
 
 	public void init();
@@ -26,7 +26,7 @@ public interface ZabbixApi {
 ```
 
 ##Example
-```
+```java
 		boolean login = zabbixApi.login("zabbix.dev", "goK0Loqua4Eipoe");
 		System.err.println("login:" + login);
 		
