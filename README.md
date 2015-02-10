@@ -50,7 +50,7 @@ public interface ZabbixApi {
 
 You can set your own ```HttpClient```.
 
-```
+```java
 		RequestConfig requestConfig = RequestConfig.custom()
 				.setConnectTimeout(5 * 1000).setConnectionRequestTimeout(5 * 1000)
 				.setSocketTimeout(5 * 1000).build();
