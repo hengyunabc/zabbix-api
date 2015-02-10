@@ -27,6 +27,10 @@ public interface ZabbixApi {
 
 ##Example
 ```java
+		String url = "http://192.168.90.102/zabbix/api_jsonrpc.php";
+		zabbixApi = new DefaultZabbixApi(url);
+		zabbixApi.init();
+		
 		boolean login = zabbixApi.login("zabbix.dev", "goK0Loqua4Eipoe");
 		System.err.println("login:" + login);
 		
