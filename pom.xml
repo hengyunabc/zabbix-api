@@ -33,6 +33,10 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.3.6</version>
+			<exclusions>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+			</exclusions>
 		</dependency>
 
 		<!-- Logging with SLF4J & LogBack -->

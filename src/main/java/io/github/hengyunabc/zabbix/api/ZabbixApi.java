@@ -1,4 +1,4 @@
-package io.github.zabbix.api;
+package io.github.hengyunabc.zabbix.api;
 
 import com.alibaba.fastjson.JSONObject;
 

@@ -1,7 +1,9 @@
-package io.github.zabbix.api;
+package io.github.hengyunabc.zabbix.api;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
 
 public class Request {
 	String jsonrpc = "2.0";
@@ -12,12 +14,12 @@ public class Request {
 	String auth;
 
 	Integer id;
-	
-	public void putParam(String key, Object value){
+
+	public void putParam(String key, Object value) {
 		params.put(key, value);
 	}
-	
-	public Object removeParam(String key){
+
+	public Object removeParam(String key) {
 		return params.remove(key);
 	}
 
@@ -59,5 +61,10 @@ public class Request {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return JSON.toJSONString(this);
 	}
 }

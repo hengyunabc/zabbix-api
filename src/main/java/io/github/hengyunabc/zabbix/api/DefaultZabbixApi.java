@@ -1,4 +1,4 @@
-package io.github.zabbix.api;
+package io.github.hengyunabc.zabbix.api;
 
 import java.io.IOException;
 import java.net.URI;
@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public class DefaultZabbixApi implements ZabbixApi {
@@ -69,8 +70,7 @@ public class DefaultZabbixApi implements ZabbixApi {
 	@Override
 	public boolean login(String user, String password) {
 		Request request = RequestBuilder.newBuilder().paramEntry("user", user)
-				.paramEntry("password", password)
-				.method("user.login").build();
+				.paramEntry("password", password).method("user.login").build();
 		JSONObject response = call(request);
 		String auth = response.getString("result");
 		if (auth != null && !auth.isEmpty()) {
@@ -82,10 +82,49 @@ public class DefaultZabbixApi implements ZabbixApi {
 
 	@Override
 	public String apiVersion() {
-		Request request = RequestBuilder.newBuilder()
-				.method("apiinfo.version").build();
+		Request request = RequestBuilder.newBuilder().method("apiinfo.version")
+				.build();
 		JSONObject response = call(request);
 		return response.getString("result");
+	}
+
+	public boolean hostExists(String name) {
+		Request request = RequestBuilder.newBuilder().method("host.exists")
+				.paramEntry("name", name).build();
+		JSONObject response = call(request);
+		return response.getBooleanValue("result");
+	}
+
+	public String hostCreate(String host, String groupId) {
+		JSONArray groups = new JSONArray();
+		JSONObject group = new JSONObject();
+		group.put("groupid", groupId);
+		groups.add(group);
+		Request request = RequestBuilder.newBuilder().method("host.create")
+				.paramEntry("host", host).paramEntry("groups", groups).build();
+		JSONObject response = call(request);
+		return response.getJSONObject("result").getJSONArray("hostids")
+				.getString(0);
+	}
+
+	public boolean hostgroupExists(String name) {
+		Request request = RequestBuilder.newBuilder()
+				.method("hostgroup.exists").paramEntry("name", name).build();
+		JSONObject response = call(request);
+		return response.getBooleanValue("result");
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @return groupId
+	 */
+	public String hostgroupCreate(String name) {
+		Request request = RequestBuilder.newBuilder()
+				.method("hostgroup.create").paramEntry("name", name).build();
+		JSONObject response = call(request);
+		return response.getJSONObject("result").getJSONArray("groupids")
+				.getString(0);
 	}
 
 	@Override
