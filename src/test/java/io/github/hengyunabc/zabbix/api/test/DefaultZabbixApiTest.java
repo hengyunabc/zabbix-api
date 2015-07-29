@@ -48,33 +48,30 @@ public class DefaultZabbixApiTest {
 			Request request = RequestBuilder.newBuilder().method("user.get")
 					.paramEntry("output", "extend").build();
 			JSONObject response = zabbixApi.call(request);
-			System.err.println(response);
+			System.err.println(JSON.toJSONString(response, true));
 		}
 	}
-	
+
 	@Test
-	public void testHostGet(){
+	public void testHostGet() {
 		boolean login = zabbixApi.login("zabbix.dev", "goK0Loqua4Eipoe");
 		System.err.println("login:" + login);
-		
-		String host = "192.168.66.29xx";
+
+		String host = "192.168.66.29";
 		JSONObject filter = new JSONObject();
-		
+
 		filter.put("host", new String[] { host });
-		Request getRequest = RequestBuilder.newBuilder()
-				.method("host.get").paramEntry("filter", filter)
-//				.paramEntry("output", "extend")
-				.build();
+		Request getRequest = RequestBuilder.newBuilder().method("host.get")
+				.paramEntry("filter", filter).build();
 		JSONObject getResponse = zabbixApi.call(getRequest);
 		System.err.println(getResponse);
-		String hostid = getResponse.getJSONArray("result")
-				.getJSONObject(0).getString("hostid");
+		String hostid = getResponse.getJSONArray("result").getJSONObject(0)
+				.getString("hostid");
 		System.err.println(hostid);
 	}
 
 	@Test
 	public void testItemCreate() {
-		
 		boolean login = zabbixApi.login("zabbix.dev", "goK0Loqua4Eipoe");
 		System.err.println("login:" + login);
 		String name = "testItem";
@@ -83,7 +80,7 @@ public class DefaultZabbixApiTest {
 		int type = 2; // trapper
 		int value_type = 0; // float
 		int delay = 30;
-		
+
 		String interfaceid = "123";
 
 		Request request = RequestBuilder.newBuilder().method("item.create")
@@ -91,14 +88,28 @@ public class DefaultZabbixApiTest {
 				.paramEntry("hostid", hostid).paramEntry("type", type)
 				.paramEntry("value_type", value_type)
 				.paramEntry("delay", delay)
-				.paramEntry("interfaceid", interfaceid)
-				.build();
-		
+				.paramEntry("interfaceid", interfaceid).build();
+
 		System.err.println(JSON.toJSONString(request));
-		
+
 		JSONObject result = zabbixApi.call(request);
 
-		System.err.println(result);
+		System.err.println(JSON.toJSONString(result, true));
+	}
 
+	@Test
+	public void testGetTrigger() {
+		boolean login = zabbixApi.login("zabbix.dev", "goK0Loqua4Eipoe");
+		System.err.println("login:" + login);
+
+		Request request = RequestBuilder.newBuilder().method("trigger.get")
+				.paramEntry("triggerids", 2322).paramEntry("output", "extend")
+				.paramEntry("selectFunctions", "extend").build();
+
+		System.err.println(JSON.toJSONString(request));
+
+		JSONObject result = zabbixApi.call(request);
+
+		System.err.println(JSON.toJSONString(result, true));
 	}
 }
