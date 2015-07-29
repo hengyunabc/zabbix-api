@@ -69,3 +69,6 @@ You can set your own ```HttpClient```.
 		
 		zabbixApi.destory();
 ```
+
+##Licence
+Apache License V2
