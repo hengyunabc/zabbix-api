@@ -5,6 +5,10 @@ https://www.zabbix.com/wiki/doc/api
 
 https://www.zabbix.com/documentation/2.4/manual/api/reference/user/login
 
+Based on zabbix api version 2.4.
+
+**Zabbix api version 2.2 will throw a exception.**
+
 ##Info
 API is simple, beacuse java can not process json like dynamic language. 
 
