@@ -14,7 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public class DefaultZabbixApiTest {
 
-	ZabbixApi zabbixApi;
+	private ZabbixApi zabbixApi;
 
 	@Before
 	public void before() {

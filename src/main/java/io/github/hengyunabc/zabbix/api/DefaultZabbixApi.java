@@ -21,11 +21,11 @@ import com.alibaba.fastjson.JSONObject;
 public class DefaultZabbixApi implements ZabbixApi {
 	Logger logger = LoggerFactory.getLogger(DefaultZabbixApi.class);
 
-	CloseableHttpClient httpClient;
+	private CloseableHttpClient httpClient;
 
-	URI uri;
+	private URI uri;
 
-	String auth;
+	private String auth;
 
 	public DefaultZabbixApi(String url) {
 		try {
