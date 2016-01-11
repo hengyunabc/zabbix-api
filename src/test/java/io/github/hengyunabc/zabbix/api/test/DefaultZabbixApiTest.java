@@ -28,7 +28,7 @@ public class DefaultZabbixApiTest {
 
 	@After
 	public void after() {
-		zabbixApi.destory();
+		zabbixApi.destroy();
 	}
 
 	@Test

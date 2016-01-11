@@ -57,7 +57,7 @@ public class DefaultZabbixApi implements ZabbixApi {
 	}
 
 	@Override
-	public void destory() {
+	public void destroy() {
 		if (httpClient != null) {
 			try {
 				httpClient.close();

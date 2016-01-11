@@ -6,7 +6,7 @@ public interface ZabbixApi {
 
 	void init();
 
-	void destory();
+	void destroy();
 
 	String apiVersion();
 
