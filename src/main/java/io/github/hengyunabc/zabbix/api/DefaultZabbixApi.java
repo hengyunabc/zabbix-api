@@ -19,7 +19,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public class DefaultZabbixApi implements ZabbixApi {
-	Logger logger = LoggerFactory.getLogger(DefaultZabbixApi.class);
+	private static final Logger logger = LoggerFactory.getLogger(DefaultZabbixApi.class);
 
 	private CloseableHttpClient httpClient;
 
