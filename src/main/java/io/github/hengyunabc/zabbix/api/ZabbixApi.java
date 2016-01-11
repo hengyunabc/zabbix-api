@@ -4,13 +4,13 @@ import com.alibaba.fastjson.JSONObject;
 
 public interface ZabbixApi {
 
-	public void init();
+	void init();
 
-	public void destory();
+	void destory();
 
-	public String apiVersion();
+	String apiVersion();
 
-	public JSONObject call(Request request);
+	JSONObject call(Request request);
 
-	public boolean login(String user, String password);
+	boolean login(String user, String password);
 }
