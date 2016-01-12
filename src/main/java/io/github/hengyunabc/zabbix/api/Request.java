@@ -6,14 +6,15 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 
 public class Request {
-	String jsonrpc = "2.0";
-	Map<String, Object> params = new HashMap<String, Object>();
+	private String jsonrpc = "2.0";
 
-	String method;
+	private Map<String, Object> params = new HashMap<>();
 
-	String auth;
+	private String method;
 
-	Integer id;
+	private String auth;
+
+	private Integer id;
 
 	public void putParam(String key, Object value) {
 		params.put(key, value);

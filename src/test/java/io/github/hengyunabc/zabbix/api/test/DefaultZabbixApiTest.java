@@ -14,7 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public class DefaultZabbixApiTest {
 
-	ZabbixApi zabbixApi;
+	private ZabbixApi zabbixApi;
 
 	@Before
 	public void before() {
@@ -28,7 +28,7 @@ public class DefaultZabbixApiTest {
 
 	@After
 	public void after() {
-		zabbixApi.destory();
+		zabbixApi.destroy();
 	}
 
 	@Test

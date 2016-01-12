@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RequestBuilder {
     private static final AtomicInteger nextId = new AtomicInteger(1);
 
-	Request request = new Request();
+	private Request request = new Request();
 	
 	private RequestBuilder(){
 

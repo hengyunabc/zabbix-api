@@ -27,6 +27,6 @@ public class HttpClientConfigExample{
 		
 		System.out.println("api version:" + apiVersion);
 		
-		zabbixApi.destory();
+		zabbixApi.destroy();
 	}
 }
