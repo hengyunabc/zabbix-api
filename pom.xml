@@ -8,7 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.hengyunabc</groupId>
 	<artifactId>zabbix-api</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 
 	<name>zabbix-api</name>
 	<description>zabbix-api for java</description>
