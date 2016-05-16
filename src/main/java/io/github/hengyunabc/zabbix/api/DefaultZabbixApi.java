@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -137,7 +138,7 @@ public class DefaultZabbixApi implements ZabbixApi {
 			HttpUriRequest httpRequest = org.apache.http.client.methods.RequestBuilder
 					.post().setUri(uri)
 					.addHeader("Content-Type", "application/json")
-					.setEntity(new StringEntity(JSON.toJSONString(request)))
+					.setEntity(new StringEntity(JSON.toJSONString(request),ContentType.APPLICATION_JSON))
 					.build();
 			CloseableHttpResponse response = httpClient.execute(httpRequest);
 			HttpEntity entity = response.getEntity();
