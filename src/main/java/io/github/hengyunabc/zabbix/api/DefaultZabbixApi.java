@@ -70,6 +70,7 @@ public class DefaultZabbixApi implements ZabbixApi {
 
 	@Override
 	public boolean login(String user, String password) {
+		this.auth=null;
 		Request request = RequestBuilder.newBuilder().paramEntry("user", user)
 				.paramEntry("password", password).method("user.login").build();
 		JSONObject response = call(request);
@@ -131,7 +132,7 @@ public class DefaultZabbixApi implements ZabbixApi {
 	@Override
 	public JSONObject call(Request request) {
 		if (request.getAuth() == null) {
-			request.setAuth(auth);
+			request.setAuth(this.auth);
 		}
 
 		try {
