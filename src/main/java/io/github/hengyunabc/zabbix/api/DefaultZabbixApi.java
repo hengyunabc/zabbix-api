@@ -26,7 +26,7 @@ public class DefaultZabbixApi implements ZabbixApi {
 
 	private URI uri;
 
-	private String auth;
+	private volatile String auth;
 
 	public DefaultZabbixApi(String url) {
 		try {
@@ -70,7 +70,7 @@ public class DefaultZabbixApi implements ZabbixApi {
 
 	@Override
 	public boolean login(String user, String password) {
-		this.auth=null;
+		this.auth = null;
 		Request request = RequestBuilder.newBuilder().paramEntry("user", user)
 				.paramEntry("password", password).method("user.login").build();
 		JSONObject response = call(request);
@@ -117,7 +117,7 @@ public class DefaultZabbixApi implements ZabbixApi {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param name
 	 * @return groupId
 	 */
