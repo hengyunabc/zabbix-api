@@ -71,8 +71,8 @@ public class DefaultZabbixApi implements ZabbixApi {
 	@Override
 	public boolean login(String user, String password) {
 		this.auth = null;
-		Request request = RequestBuilder.newBuilder().paramEntry("user", user)
-				.paramEntry("password", password).method("user.login").build();
+		Request request = RequestBuilder.newBuilder().paramEntry("user", user).paramEntry("password", password)
+				.method("user.login").build();
 		JSONObject response = call(request);
 		String auth = response.getString("result");
 		if (auth != null && !auth.isEmpty()) {
@@ -84,15 +84,13 @@ public class DefaultZabbixApi implements ZabbixApi {
 
 	@Override
 	public String apiVersion() {
-		Request request = RequestBuilder.newBuilder().method("apiinfo.version")
-				.build();
+		Request request = RequestBuilder.newBuilder().method("apiinfo.version").build();
 		JSONObject response = call(request);
 		return response.getString("result");
 	}
 
 	public boolean hostExists(String name) {
-		Request request = RequestBuilder.newBuilder().method("host.exists")
-				.paramEntry("name", name).build();
+		Request request = RequestBuilder.newBuilder().method("host.exists").paramEntry("name", name).build();
 		JSONObject response = call(request);
 		return response.getBooleanValue("result");
 	}
@@ -102,16 +100,14 @@ public class DefaultZabbixApi implements ZabbixApi {
 		JSONObject group = new JSONObject();
 		group.put("groupid", groupId);
 		groups.add(group);
-		Request request = RequestBuilder.newBuilder().method("host.create")
-				.paramEntry("host", host).paramEntry("groups", groups).build();
+		Request request = RequestBuilder.newBuilder().method("host.create").paramEntry("host", host)
+				.paramEntry("groups", groups).build();
 		JSONObject response = call(request);
-		return response.getJSONObject("result").getJSONArray("hostids")
-				.getString(0);
+		return response.getJSONObject("result").getJSONArray("hostids").getString(0);
 	}
 
 	public boolean hostgroupExists(String name) {
-		Request request = RequestBuilder.newBuilder()
-				.method("hostgroup.exists").paramEntry("name", name).build();
+		Request request = RequestBuilder.newBuilder().method("hostgroup.exists").paramEntry("name", name).build();
 		JSONObject response = call(request);
 		return response.getBooleanValue("result");
 	}
@@ -122,11 +118,9 @@ public class DefaultZabbixApi implements ZabbixApi {
 	 * @return groupId
 	 */
 	public String hostgroupCreate(String name) {
-		Request request = RequestBuilder.newBuilder()
-				.method("hostgroup.create").paramEntry("name", name).build();
+		Request request = RequestBuilder.newBuilder().method("hostgroup.create").paramEntry("name", name).build();
 		JSONObject response = call(request);
-		return response.getJSONObject("result").getJSONArray("groupids")
-				.getString(0);
+		return response.getJSONObject("result").getJSONArray("groupids").getString(0);
 	}
 
 	@Override
@@ -136,11 +130,9 @@ public class DefaultZabbixApi implements ZabbixApi {
 		}
 
 		try {
-			HttpUriRequest httpRequest = org.apache.http.client.methods.RequestBuilder
-					.post().setUri(uri)
+			HttpUriRequest httpRequest = org.apache.http.client.methods.RequestBuilder.post().setUri(uri)
 					.addHeader("Content-Type", "application/json")
-					.setEntity(new StringEntity(JSON.toJSONString(request),ContentType.APPLICATION_JSON))
-					.build();
+					.setEntity(new StringEntity(JSON.toJSONString(request), ContentType.APPLICATION_JSON)).build();
 			CloseableHttpResponse response = httpClient.execute(httpRequest);
 			HttpEntity entity = response.getEntity();
 			byte[] data = EntityUtils.toByteArray(entity);
