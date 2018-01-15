@@ -8,8 +8,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import io.github.hengyunabc.zabbix.api.DefaultZabbixApi;
-import io.github.hengyunabc.zabbix.api.DeleteRequest;
-import io.github.hengyunabc.zabbix.api.DeleteRequestBuilder;
+import io.github.hengyunabc.zabbix.api.SimpleRequest;
+import io.github.hengyunabc.zabbix.api.SimpleRequestBuilder;
 import io.github.hengyunabc.zabbix.api.Request;
 import io.github.hengyunabc.zabbix.api.RequestBuilder;
 import io.github.hengyunabc.zabbix.api.ZabbixApi;
@@ -145,7 +145,7 @@ public class DefaultZabbixApiTest {
 			System.err.println("Created item id = " + itemid);
 
 			if (itemid != null) {
-				DeleteRequest deleteRequest = DeleteRequestBuilder.newBuilder().method("item.delete")
+				SimpleRequest deleteRequest = SimpleRequestBuilder.newBuilder().method("item.delete")
 						.param(itemid)
 						.build();
 

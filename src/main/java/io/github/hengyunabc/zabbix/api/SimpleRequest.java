@@ -3,7 +3,7 @@ package io.github.hengyunabc.zabbix.api;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeleteRequest extends AbstractRequest {
+public class SimpleRequest extends AbstractRequest {
 	private List<Object> params = new ArrayList<>();
 
 	public void addParam(Object value) {

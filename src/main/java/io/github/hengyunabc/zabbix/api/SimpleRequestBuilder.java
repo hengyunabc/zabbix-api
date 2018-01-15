@@ -2,19 +2,19 @@ package io.github.hengyunabc.zabbix.api;
 
 import java.util.Arrays;
 
-public class DeleteRequestBuilder {
+public class SimpleRequestBuilder {
 
-	private DeleteRequest request = new DeleteRequest();
+	private SimpleRequest request = new SimpleRequest();
 
-	public static DeleteRequestBuilder newBuilder() {
-		return new DeleteRequestBuilder();
+	public static SimpleRequestBuilder newBuilder() {
+		return new SimpleRequestBuilder();
 	}
 
-	public DeleteRequest build() {
+	public SimpleRequest build() {
 		return RequestBuilder.build(request);
 	}
 
-	public DeleteRequestBuilder version(String version) {
+	public SimpleRequestBuilder version(String version) {
 		RequestBuilder.version(request, version);
 		return this;
 	}
@@ -25,12 +25,12 @@ public class DeleteRequestBuilder {
 	 * @param auth
 	 * @return
 	 */
-	public DeleteRequestBuilder auth(String auth) {
+	public SimpleRequestBuilder auth(String auth) {
 		RequestBuilder.auth(request, auth);
 		return this;
 	}
 
-	public DeleteRequestBuilder method(String method) {
+	public SimpleRequestBuilder method(String method) {
 		RequestBuilder.method(request, method);
 		return this;
 	}
@@ -41,17 +41,17 @@ public class DeleteRequestBuilder {
 	 * @param id
 	 * @return
 	 */
-	public DeleteRequestBuilder id(Integer id) {
+	public SimpleRequestBuilder id(Integer id) {
 		RequestBuilder.id(request, id);
 		return this;
 	}
 
-	public DeleteRequestBuilder param(Object value) {
+	public SimpleRequestBuilder param(Object value) {
 		request.addParam(value);
 		return this;
 	}
 
-	public DeleteRequestBuilder params(Object ... values) {
+	public SimpleRequestBuilder params(Object ... values) {
 		request.setParams(Arrays.asList(values));
 		return this;
 	}
