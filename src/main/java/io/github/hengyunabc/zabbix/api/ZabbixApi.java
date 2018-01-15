@@ -10,7 +10,8 @@ public interface ZabbixApi {
 
 	String apiVersion();
 
-	JSONObject call(Request request);
+	<R extends AbstractRequest> JSONObject call(R request);
 
 	boolean login(String user, String password);
+
 }

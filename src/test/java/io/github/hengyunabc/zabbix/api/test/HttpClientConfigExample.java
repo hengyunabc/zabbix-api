@@ -1,14 +1,14 @@
 package io.github.hengyunabc.zabbix.api.test;
 
-import io.github.hengyunabc.zabbix.api.DefaultZabbixApi;
-import io.github.hengyunabc.zabbix.api.ZabbixApi;
-
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 
-public class HttpClientConfigExample{
+import io.github.hengyunabc.zabbix.api.DefaultZabbixApi;
+import io.github.hengyunabc.zabbix.api.ZabbixApi;
+
+public class HttpClientConfigExample {
 
 	public static void main(String[] args) {
 		RequestConfig requestConfig = RequestConfig.custom()
@@ -29,4 +29,5 @@ public class HttpClientConfigExample{
 		
 		zabbixApi.destroy();
 	}
+
 }
