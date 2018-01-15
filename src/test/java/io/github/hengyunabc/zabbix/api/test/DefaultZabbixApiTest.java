@@ -1,16 +1,18 @@
 package io.github.hengyunabc.zabbix.api.test;
 
-import io.github.hengyunabc.zabbix.api.DefaultZabbixApi;
-import io.github.hengyunabc.zabbix.api.Request;
-import io.github.hengyunabc.zabbix.api.RequestBuilder;
-import io.github.hengyunabc.zabbix.api.ZabbixApi;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+
+import io.github.hengyunabc.zabbix.api.DefaultZabbixApi;
+import io.github.hengyunabc.zabbix.api.DeleteRequest;
+import io.github.hengyunabc.zabbix.api.DeleteRequestBuilder;
+import io.github.hengyunabc.zabbix.api.Request;
+import io.github.hengyunabc.zabbix.api.RequestBuilder;
+import io.github.hengyunabc.zabbix.api.ZabbixApi;
 
 public class DefaultZabbixApiTest {
 
@@ -98,6 +100,65 @@ public class DefaultZabbixApiTest {
 	}
 
 	@Test
+	public void testItemDelete() {
+		boolean login = zabbixApi.login("zabbix.dev", "goK0Loqua4Eipoe");
+		System.err.println("login:" + login);
+		String name = "testItem2";
+		String key = name;
+		String hostid = "10180";
+		int type = 2; // trapper
+		int value_type = 0; // float
+		int delay = 30;
+
+		String interfaceid = "123";
+
+		Request createRequest = RequestBuilder.newBuilder().method("item.create")
+				.paramEntry("name", name).paramEntry("key_", key)
+				.paramEntry("hostid", hostid).paramEntry("type", type)
+				.paramEntry("value_type", value_type)
+				.paramEntry("delay", delay)
+				.paramEntry("interfaceid", interfaceid).build();
+
+		System.err.println(JSON.toJSONString(createRequest));
+
+		JSONObject createResponse = zabbixApi.call(createRequest);
+
+		System.err.println(JSON.toJSONString(createResponse, true));
+
+		JSONObject getItemFilter = new JSONObject();
+		getItemFilter.put("key_", key);
+		Request getRequest = RequestBuilder.newBuilder().method("item.get")
+				.paramEntry("output", "extend")
+				.paramEntry("hostids", hostid)
+				.paramEntry("sortfield", "name")
+				.paramEntry("filter", getItemFilter)
+				.build();
+
+		System.err.println(JSON.toJSONString(getRequest));
+
+		JSONObject getResponse = zabbixApi.call(getRequest);
+
+		System.err.println(JSON.toJSONString(getResponse, true));
+
+		if (!getResponse.getJSONArray("result").isEmpty()) {
+			String itemid = getResponse.getJSONArray("result").getJSONObject(0).getString("itemid");
+			System.err.println("Created item id = " + itemid);
+
+			if (itemid != null) {
+				DeleteRequest deleteRequest = DeleteRequestBuilder.newBuilder().method("item.delete")
+						.param(itemid)
+						.build();
+
+				System.err.println(JSON.toJSONString(deleteRequest));
+
+				JSONObject deleteResponse = zabbixApi.call(deleteRequest);
+
+				System.err.println(JSON.toJSONString(deleteResponse, true));
+			}
+		}
+	}
+
+	@Test
 	public void testGetTrigger() {
 		boolean login = zabbixApi.login("zabbix.dev", "goK0Loqua4Eipoe");
 		System.err.println("login:" + login);
@@ -112,4 +173,5 @@ public class DefaultZabbixApiTest {
 
 		System.err.println(JSON.toJSONString(result, true));
 	}
+
 }
