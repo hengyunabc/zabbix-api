@@ -124,7 +124,7 @@ public class DefaultZabbixApi implements ZabbixApi {
 	}
 
 	@Override
-	public JSONObject call(Request request) {
+	public <R extends AbstractRequest> JSONObject call(R request) {
 		if (request.getAuth() == null) {
 			request.setAuth(this.auth);
 		}
